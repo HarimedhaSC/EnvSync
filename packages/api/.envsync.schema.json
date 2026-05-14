@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "variables": {
+    "PORT": {
+      "required": true,
+      "type": "number",
+      "description": "Port the server listens on",
+      "example": "3000"
+    },
+    "NODE_ENV": {
+      "required": true,
+      "type": "string",
+      "allowed": ["development", "staging", "production"],
+      "description": "Runtime environment"
+    },
+    "DATABASE_URL": { "required": true, "type": "url" },
+    "REDIS_URL": { "required": true, "type": "url" },
+    "JWT_SECRET": { "required": true, "type": "string" },
+    "JWT_EXPIRES_IN": { "required": true, "type": "string" },
+    "ENCRYPTION_KEY": { "required": true, "type": "string" },
+    "RATE_LIMIT_WINDOW_MS": { "required": true, "type": "number" },
+    "RATE_LIMIT_MAX": { "required": true, "type": "number" }
+  }
+}

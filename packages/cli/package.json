@@ -1,0 +1,31 @@
+{
+  "name": "@envsync/cli",
+  "version": "0.1.0",
+  "description": "Sync environment variables across teams and machines",
+  "main": "dist/index.js",
+  "bin": {
+    "envsync": "./dist/index.js"
+  },
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "build": "tsc && chmod +x dist/index.js",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "axios": "^1.7.2",
+    "chalk": "^4.1.2",
+    "commander": "^12.1.0",
+    "dotenv": "^16.4.5",
+    "inquirer": "^8.2.6",
+    "keytar": "^7.9.0",
+    "ora": "^5.4.1",
+    "conf": "^10.2.0"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^8.2.10",
+    "@types/node": "^20.14.10",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.5.3"
+  }
+}

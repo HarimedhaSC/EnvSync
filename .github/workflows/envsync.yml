@@ -1,0 +1,68 @@
+# .github/workflows/envsync.yml
+#
+# This workflow pulls environment variables from envsync before your
+# build/deploy steps run.
+#
+# Setup:
+#   1. Run: envsync tokens create "GitHub Actions"
+#   2. Copy the token and add it to your GitHub repo secrets as ENVSYNC_TOKEN
+#   3. Add your API URL as ENVSYNC_API_URL (e.g. https://your-api.com)
+#   4. Add this file to your repo at .github/workflows/envsync.yml
+
+name: Pull env vars from envsync
+
+on:
+  push:
+    branches: [main, staging]
+  pull_request:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install envsync CLI
+        run: npm install -g @envsync/cli
+
+      - name: Pull environment variables
+        env:
+          ENVSYNC_TOKEN: ${{ secrets.ENVSYNC_TOKEN }}
+          ENVSYNC_API_URL: ${{ secrets.ENVSYNC_API_URL }}
+        run: |
+          # Determine environment based on branch
+          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            ENV="production"
+          elif [ "${{ github.ref }}" = "refs/heads/staging" ]; then
+            ENV="staging"
+          else
+            ENV="development"
+          fi
+
+          echo "Pulling vars for environment: $ENV"
+          envsync pull --env $ENV --token $ENVSYNC_TOKEN --api-url $ENVSYNC_API_URL
+
+      - name: Run doctor check
+        env:
+          ENVSYNC_TOKEN: ${{ secrets.ENVSYNC_TOKEN }}
+          ENVSYNC_API_URL: ${{ secrets.ENVSYNC_API_URL }}
+        run: envsync doctor
+
+      # ── Your actual build/deploy steps go below ──────────────────────────────
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      # - name: Deploy
+      #   run: npm run deploy

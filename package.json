@@ -1,0 +1,12 @@
+{
+  "name": "envsync",
+  "private": true,
+  "workspaces": ["packages/*"],
+  "scripts": {
+    "dev:api": "npm run dev --workspace=packages/api",
+    "dev:cli": "npm run dev --workspace=packages/cli",
+    "build": "npm run build --workspaces",
+    "db:migrate": "npm run migrate --workspace=packages/api",
+    "db:seed": "npm run seed --workspace=packages/api"
+  }
+}
