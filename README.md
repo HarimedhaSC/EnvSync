@@ -248,18 +248,4 @@ envsync/
 
 ---
 
-## Environment Variables
-
-```dotenv
-# packages/api/.env
-PORT=3000
-NODE_ENV=development
-DATABASE_URL=postgresql://envsync:envsync_secret@localhost:5432/envsync_db
-REDIS_URL=redis://localhost:6379
-JWT_SECRET=your_strong_random_secret
-JWT_EXPIRES_IN=7d
-ENCRYPTION_KEY=your_32_byte_hex_key
-RATE_LIMIT_WINDOW_MS=900000
-RATE_LIMIT_MAX=100
-```
 
