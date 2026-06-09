@@ -13,6 +13,7 @@ import { diffCommand } from "./commands/diff";
 import { historyCommand } from "./commands/history";
 import { membersCommand } from "./commands/members";
 import { tokensCommand } from "./commands/tokens";
+import { explainCommand } from "./commands/explain";
 
 const program = new Command();
 
@@ -34,6 +35,7 @@ program.addCommand(diffCommand);
 program.addCommand(historyCommand);
 program.addCommand(membersCommand);
 program.addCommand(tokensCommand);
+program.addCommand(explainCommand);
 
 // Logout shortcut
 program
